@@ -1,0 +1,26 @@
+{
+  "name": "ts-ez-host",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HearTao/ts-ez-host.git"
+  },
+  "author": "Kingwl",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HearTao/ts-ez-host/issues"
+  },
+  "homepage": "https://github.com/HearTao/ts-ez-host#readme",
+  "peerDependencies": {
+    "memfs": "^2.15.5",
+    "typescript": "^3.5.3"
+  },
+  "devDependencies": {
+    "@types/node": "^12.7.2"
+  }
+}
