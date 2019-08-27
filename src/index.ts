@@ -66,7 +66,7 @@ export class VHost implements ts.CompilerHost {
         fileName: string,
         cwd: string = this.getCurrentDirectory()
     ): string {
-        return path.posix.resolve(cwd, fileName)
+        return path.resolve(cwd, fileName)
     }
 
     writeFile(
