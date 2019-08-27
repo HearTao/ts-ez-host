@@ -22,7 +22,9 @@
     "typescript": "^3.5.3"
   },
   "devDependencies": {
-    "@types/node": "^12.7.2"
+    "@types/node": "^12.7.2",
+    "memfs": "^2.15.5",
+    "typescript": "^3.5.3"
   },
   "files": [
     "src",
