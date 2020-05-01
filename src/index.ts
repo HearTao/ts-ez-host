@@ -50,6 +50,32 @@ export class VHost implements ts.CompilerHost {
         return this.cwd
     }
 
+    readDirectory(path: string, extensions?: readonly string[], exclude?: readonly string[], include?: readonly string[], depth?: number): string[] {
+        return ts.matchFiles(path, extensions, exclude, include, this.useCaseSensitiveFileNames(), this.getCurrentDirectory(), depth, path => this.getAccessibleFileSystemEntries(path), path => this.realpath(path));   
+    }
+
+    getAccessibleFileSystemEntries(filePath: string): ts.FileSystemEntries {
+        const files: string[] = [];
+        const directories: string[] = [];
+        try {
+            for (const file of vol.readdirSync(filePath)) {
+                try {
+                    const filename = file.toString();
+                    const stats = vol.statSync(path.join(filePath, filename))
+                    if (stats.isFile()) {
+                        files.push(filename);
+                    }
+                    else if (stats.isDirectory()) {
+                        directories.push(filename);
+                    }
+                }
+                catch { /*ignored*/ }
+            }
+        }
+        catch { /*ignored*/ }
+        return { files, directories };
+    }
+
     /* istanbul ignore next */
     getDirectories(path: string): string[] {
         const dirents = vol.readdirSync(path, {
@@ -62,7 +88,7 @@ export class VHost implements ts.CompilerHost {
         }, [])
     }
 
-    private resolveFilePath(
+    resolveFilePath(
         fileName: string,
         cwd: string = this.getCurrentDirectory()
     ): string {
